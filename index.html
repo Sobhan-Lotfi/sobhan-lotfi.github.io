@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobhan Lotfi</title>
+<meta name="description" content="Sobhan Lotfi. AI safety and alignment research: behavioral attribution, causality, and evaluation.">
+
+<meta property="og:title" content="Sobhan Lotfi">
+<meta property="og:description" content="AI safety and alignment research: behavioral attribution, causality, and evaluation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sobhan-lotfi.github.io/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#F2F2EF;
+  --ink:#1A1B18;
+  --muted:#6E706A;
+  --rule:#D9D9D2;
+  --accent:#2F4F42;
+  --accent-lift:#3F6B58;
+
+  --display:"Newsreader",Georgia,serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+
+  --rail:9rem;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:56rem;margin:0 auto;padding:5rem 1.5rem 6rem}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(47,79,66,.28)}
+a:hover{color:var(--accent-lift);border-bottom-color:var(--accent-lift)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- masthead ---------- */
+.masthead{display:grid;grid-template-columns:132px 1fr;gap:2.25rem;align-items:start}
+.portrait{
+  width:132px;height:132px;border-radius:2px;overflow:hidden;
+  background:#E4E4DD;border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait span{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);text-align:center;padding:0 .5rem;
+}
+h1{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(2.4rem,6vw,3.1rem);line-height:1.05;
+  letter-spacing:-.015em;margin:-.35rem 0 .6rem;
+}
+.fields{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem;
+}
+.affil{font-size:.95rem;color:var(--muted);margin:0 0 1.1rem;max-width:34rem}
+.affil a{color:var(--muted);border-bottom-color:rgba(110,112,106,.35)}
+.affil a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.contact{
+  display:flex;flex-wrap:wrap;gap:.4rem 1.15rem;
+  font-family:var(--mono);font-size:.78rem;margin:0;padding:0;list-style:none;
+}
+
+/* ---------- bio ---------- */
+.bio{font-family:var(--display);font-size:1.19rem;line-height:1.62;max-width:38rem;margin:3.5rem 0 0}
+.bio p{margin:0 0 1.05rem}
+.bio p:last-child{margin-bottom:0}
+.bio .prior{color:var(--muted);font-size:1.06rem}
+
+.seeking{
+  font-family:var(--mono);font-size:.78rem;line-height:1.65;
+  margin:2.25rem 0 0;padding:.85rem 0 .85rem 1.1rem;
+  border-left:2px solid var(--accent);max-width:38rem;
+}
+
+/* ---------- sections ---------- */
+section{margin-top:4.25rem}
+h2{
+  font-family:var(--mono);font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 1.75rem;padding-bottom:.7rem;border-bottom:1px solid var(--rule);
+}
+.entry{
+  display:grid;grid-template-columns:var(--rail) 1fr;gap:2rem;
+  padding:1.4rem 0;border-bottom:1px solid var(--rule);
+}
+.entry:last-child{border-bottom:none}
+.meta{font-family:var(--mono);font-size:.74rem;line-height:1.5;color:var(--muted);padding-top:.18rem}
+.venue{display:block;color:var(--accent);font-weight:500}
+.note{display:block;margin-top:.15rem}
+
+.title{font-size:1.02rem;font-weight:600;line-height:1.4;margin:0 0 .35rem}
+.title a{border-bottom-color:transparent}
+.title a:hover{border-bottom-color:var(--accent-lift)}
+.authors{font-size:.88rem;color:var(--muted);margin:0 0 .45rem;line-height:1.55}
+.authors .me{color:var(--ink);font-weight:600}
+.blurb{font-size:.92rem;color:var(--muted);margin:0}
+.links{font-family:var(--mono);font-size:.74rem;margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.9rem}
+
+.role{font-size:1.02rem;font-weight:600;margin:0 0 .2rem}
+.org{font-size:.92rem;color:var(--muted);margin:0 0 .3rem}
+.detail{font-size:.92rem;color:var(--muted);margin:0}
+
+/* awards: the numbers carry the weight */
+.award .title{margin-bottom:.2rem}
+.scale{font-family:var(--mono);font-size:.82rem;color:var(--accent)}
+
+footer{
+  margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+  font-size:.86rem;color:var(--muted);
+}
+footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
+
+@media (max-width:640px){
+  .wrap{padding:3rem 1.25rem 4rem}
+  .masthead{grid-template-columns:1fr;gap:1.5rem}
+  .portrait{width:104px;height:104px}
+  h1{margin-top:0}
+  .bio{font-size:1.1rem;margin-top:2.5rem}
+  section{margin-top:3rem}
+  .entry{grid-template-columns:1fr;gap:.55rem}
+  .meta{padding-top:0}
+  .venue{display:inline}
+  .note{display:inline;margin-left:.5rem}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .wrap>*{animation:rise .5s ease-out backwards}
+  .wrap>*:nth-child(2){animation-delay:.06s}
+  .wrap>*:nth-child(3){animation-delay:.12s}
+  .wrap>*:nth-child(4){animation-delay:.18s}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+  <header class="masthead">
+    <div class="portrait">
+      <img src="photo.jpg" alt="Sobhan Lotfi">
+    </div>
+    <div>
+      <h1>Sobhan Lotfi</h1>
+      <p class="fields">Machine Learning &middot; AI Safety &middot; Causality &middot; Evaluation</p>
+      <p class="affil">
+        Final-year B.Sc. in Computer Engineering, Sharif University of Technology.
+        Currently a Technical AI Governance Research Fellow at
+        <a href="https://www.erafellowship.org/">ERA</a>, Cambridge.
+      </p>
+      <ul class="contact">
+        <li><a href="mailto:sobhanlotfi121@gmail.com">Email</a></li>
+        <li><a href="https://scholar.google.com/citations?user=w-8KiacAAAAJ">Scholar</a></li>
+        <!-- <li><a href="https://x.com/handle">X</a></li> -->
+      </ul>
+    </div>
+  </header>
+
+  <div class="bio">
+    <p>I work on AI safety and alignment. My interest is in what model behavior is evidence of: I test whether a claimed capability is really there by intervening on generation, on training data, and on post-training itself. I also think about what benchmark-driven development structurally cannot see.</p>
+    <p class="prior">Previously: causal discovery for biological data, and memorization and privacy in neural networks.</p>
+  </div>
+
+  <p class="seeking">
+    I am applying to PhD programs for Fall 2027. If you work on evaluation, behavioral attribution,
+    or causal inference for models, I would like to hear from you.
+  </p>
+
+  <section>
+    <h2>Publications</h2>
+
+    <article class="entry">
+      <div class="meta">
+        <span class="venue">ICML 2026</span>
+        <span class="note">Oral</span>
+      </div>
+      <div>
+        <p class="title"><a href="https://icml.cc/virtual/2026/poster/67149">Position: There are futures that benchmark-driven AI cannot see</a></p>
+        <p class="authors"><span class="me">Sobhan Lotfi</span>, Ava Iranmanesh, Lachin Naghashyar, Ali Shirali, Fateme Nateghi Haredasht, Sanmi Koyejo, Philip Torr, Yong Suk Lee, Fazl Barez, Joel Lehman, Peter Norvig, Arvind Narayanan</p>
+        <p class="blurb">Benchmarks decide which problems count as progress, and in doing so they quietly fix the set of futures a research culture can even aim at. We argue that the resulting blind spots are structural rather than incidental, and that they will not be fixed by adding more benchmarks. Selected as one of 168 orals from 24,371 submissions.</p>
+        <p class="links"><a href="https://icml.cc/virtual/2026/poster/67149">ICML</a> <a href="https://openreview.net/pdf/c0833e1fef52e998ef8d65944caaa3aae0eaa35c.pdf">PDF</a></p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="meta">
+        <span class="venue">NeurIPS 2026</span>
+        <span class="note">Datasets &amp; Benchmarks, under review</span>
+      </div>
+      <div>
+        <p class="title"><a href="https://aliiiranmanesh.github.io/hearSay/">HearSayBench: Can LLMs Navigate from Abstract Human Rights to Lived Lives?</a></p>
+        <p class="authors"><span class="me">Sobhan Lotfi</span>*, Ava Iranmanesh*, Ali Iranmanesh*, Liwei Jiang</p>
+        <p class="blurb">A benchmark probing whether models recognize the unstated structural constraints that make standard advice impossible for people in adversarial conditions. Across 11 frontier and open-weight models we find a systemic 37% drop between understanding a situation and giving advice that respects it. Oral at the Pluralistic Alignment Workshop, ICML 2026.</p>
+        <p class="links"><a href="https://aliiiranmanesh.github.io/hearSay/">Project page</a></p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="meta">
+        <span class="venue">IJHCS</span>
+        <span class="note">Int. J. Human-Computer Studies</span>
+      </div>
+      <div>
+        <p class="title"><a href="https://arxiv.org/abs/2507.12721">Design Patterns of Human-AI Interfaces in Healthcare</a></p>
+        <p class="authors">Rui Sheng, Chuhan Shi, <span class="me">Sobhan Lotfi</span>, Shiyi Liu, Adam Perer, Huamin Qu, Furui Cheng</p>
+        <p class="blurb">A review of clinical human-AI interfaces yielding 15 recurring information entities and 12 design patterns, each grounded in interviews with 12 healthcare professionals and evaluated with 14 UI designers.</p>
+        <p class="links"><a href="https://arxiv.org/abs/2507.12721">arXiv</a> <a href="https://doi.org/10.1016/j.ijhcs.2026.103737">DOI</a></p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="meta">
+        <span class="venue">Preprint</span>
+      </div>
+      <div>
+        <p class="title">Dynamic Implicit Neural Representations for Image Compression</p>
+        <p class="authors"><span class="me">Sobhan Lotfi</span>, Peyman Paknezhad, Pooya Ashtari, Fateme Nateghi Haredasht, Yixing Jiang, Aleksandra Pizurica</p>
+        <p class="blurb">Implicit neural representations with input-dependent dynamics for image compression.</p>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <article class="entry">
+      <div class="meta"><span class="venue">2026</span><span class="note">Summer, Cambridge</span></div>
+      <div>
+        <p class="role">Technical AI Governance Research Fellow</p>
+        <p class="org">ERA:AI Fellowship, Emmanuel College, University of Cambridge</p>
+        <p class="detail">Supervised by Fazl Barez (Oxford). Behavioral attribution in language models: what generation-time and training-time interventions can and cannot establish about a claimed capability.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="meta"><span class="venue">2024</span><span class="note">Summer, Hong Kong</span></div>
+      <div>
+        <p class="role">Research Intern</p>
+        <p class="org">Hong Kong University of Science and Technology</p>
+        <p class="detail">With Huamin Qu (HKUST) and Adam Perer (CMU). Synthesized design patterns from clinical human-AI interaction systems and validated them with practitioners and designers.</p>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <h2>Awards</h2>
+
+    <article class="entry award">
+      <div class="meta"><span class="venue">2026</span><span class="note">June</span></div>
+      <div>
+        <p class="title">ERA:AI Fellowship, Cambridge</p>
+        <p class="blurb"><span class="scale">30 of 6,000+ applicants.</span></p>
+      </div>
+    </article>
+
+    <article class="entry award">
+      <div class="meta"><span class="venue">2026</span><span class="note">May</span></div>
+      <div>
+        <p class="title">Oral presentation, ICML 2026</p>
+        <p class="blurb"><span class="scale">168 orals from 24,371 submissions.</span></p>
+      </div>
+    </article>
+
+    <article class="entry award">
+      <div class="meta"><span class="venue">2022</span><span class="note">August</span></div>
+      <div>
+        <p class="title">Rank 10, Iranian National University Entrance Exam</p>
+        <p class="blurb"><span class="scale">Of more than 150,000 participants.</span></p>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p>Away from work I listen to a lot of classical music, mostly the Romantic and Impressionist eras, read Hafez and Khayyam, and play football.</p>
+    <p class="stamp">Last updated August 2026</p>
+  </footer>
+
+</main>
+</body>
+</html>
