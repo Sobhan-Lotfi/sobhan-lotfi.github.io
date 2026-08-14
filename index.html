@@ -45,9 +45,9 @@ a:hover{color:var(--accent-lift);border-bottom-color:var(--accent-lift)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
 /* ---------- masthead ---------- */
-.masthead{display:grid;grid-template-columns:132px 1fr;gap:2.25rem;align-items:start}
+.masthead{display:grid;grid-template-columns:180px 1fr;gap:2.5rem;align-items:start}
 .portrait{
-  width:132px;height:132px;border-radius:2px;overflow:hidden;
+  width:180px;height:180px;border-radius:2px;overflow:hidden;
   background:#E4E4DD;border:1px solid var(--rule);
   display:flex;align-items:center;justify-content:center;
 }
@@ -80,9 +80,11 @@ h1{
 .bio .prior{color:var(--muted);font-size:1.06rem}
 
 .seeking{
-  font-family:var(--mono);font-size:.78rem;line-height:1.65;
-  margin:2.25rem 0 0;padding:.85rem 0 .85rem 1.1rem;
-  border-left:2px solid var(--accent);max-width:38rem;
+  font-family:var(--mono);font-size:.79rem;line-height:1.7;
+  margin:2.5rem 0 0;padding:1rem 1.15rem;
+  border-left:3px solid var(--accent);
+  background:rgba(47,79,66,.045);
+  max-width:38rem;
 }
 
 /* ---------- sections ---------- */
@@ -98,10 +100,17 @@ h2{
 }
 .entry:last-child{border-bottom:none}
 .meta{font-family:var(--mono);font-size:.74rem;line-height:1.5;color:var(--muted);padding-top:.18rem}
-.venue{display:block;color:var(--accent);font-weight:500}
+.venue{display:block;color:var(--ink);font-weight:500;font-size:.82rem;letter-spacing:.01em}
+.stamp-tag{
+  display:inline-block;margin-top:.4rem;
+  font-family:var(--mono);font-size:.63rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--paper);background:var(--accent);
+  padding:.2rem .45rem;border-radius:2px;
+}
 .note{display:block;margin-top:.15rem}
 
-.title{font-size:1.02rem;font-weight:600;line-height:1.4;margin:0 0 .35rem}
+.title{font-size:1.14rem;font-weight:600;line-height:1.35;margin:0 0 .4rem;letter-spacing:-.005em}
 .title a{border-bottom-color:transparent}
 .title a:hover{border-bottom-color:var(--accent-lift)}
 .authors{font-size:.88rem;color:var(--muted);margin:0 0 .45rem;line-height:1.55}
@@ -115,7 +124,13 @@ h2{
 
 /* awards: the numbers carry the weight */
 .award .title{margin-bottom:.2rem}
-.scale{font-family:var(--mono);font-size:.82rem;color:var(--accent)}
+.scale{
+  display:block;font-family:var(--mono);
+  font-size:1.45rem;line-height:1.2;font-weight:500;
+  color:var(--accent);margin-top:.35rem;letter-spacing:-.02em;
+}
+.scale small{display:block;font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-top:.3rem;font-weight:400}
 
 footer{
   margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--rule);
@@ -126,7 +141,7 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
 @media (max-width:640px){
   .wrap{padding:3rem 1.25rem 4rem}
   .masthead{grid-template-columns:1fr;gap:1.5rem}
-  .portrait{width:104px;height:104px}
+  .portrait{width:132px;height:132px}
   h1{margin-top:0}
   .bio{font-size:1.1rem;margin-top:2.5rem}
   section{margin-top:3rem}
@@ -151,7 +166,9 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
 
   <header class="masthead">
     <div class="portrait">
-      <img src="photo.jpg" alt="Sobhan Lotfi">
+      <span>photo</span>
+      <!-- Save a square photo as photo.jpg next to this file, then swap the two lines:
+      <img src="photo.jpg" alt="Sobhan Lotfi"> -->
     </div>
     <div>
       <h1>Sobhan Lotfi</h1>
@@ -185,12 +202,12 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
     <article class="entry">
       <div class="meta">
         <span class="venue">ICML 2026</span>
-        <span class="note">Oral</span>
+        <span class="stamp-tag">Oral</span>
       </div>
       <div>
         <p class="title"><a href="https://icml.cc/virtual/2026/poster/67149">Position: There are futures that benchmark-driven AI cannot see</a></p>
         <p class="authors"><span class="me">Sobhan Lotfi</span>, Ava Iranmanesh, Lachin Naghashyar, Ali Shirali, Fateme Nateghi Haredasht, Sanmi Koyejo, Philip Torr, Yong Suk Lee, Fazl Barez, Joel Lehman, Peter Norvig, Arvind Narayanan</p>
-        <p class="blurb">Benchmarks decide which problems count as progress, and in doing so they quietly fix the set of futures a research culture can even aim at. We argue that the resulting blind spots are structural rather than incidental, and that they will not be fixed by adding more benchmarks. Selected as one of 168 orals from 24,371 submissions.</p>
+        <p class="blurb">Benchmarks decide which problems count as progress, and in doing so they quietly fix the set of futures a research culture can even aim at. We argue that the resulting blind spots are structural rather than incidental, and that they will not be fixed by adding more benchmarks.</p>
         <p class="links"><a href="https://icml.cc/virtual/2026/poster/67149">ICML</a> <a href="https://openreview.net/pdf/c0833e1fef52e998ef8d65944caaa3aae0eaa35c.pdf">PDF</a></p>
       </div>
     </article>
@@ -198,7 +215,8 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
     <article class="entry">
       <div class="meta">
         <span class="venue">NeurIPS 2026</span>
-        <span class="note">Datasets &amp; Benchmarks, under review</span>
+        <span class="note">Datasets &amp; Benchmarks</span>
+        <span class="stamp-tag">Under review</span>
       </div>
       <div>
         <p class="title"><a href="https://aliiiranmanesh.github.io/hearSay/">HearSayBench: Can LLMs Navigate from Abstract Human Rights to Lived Lives?</a></p>
@@ -262,7 +280,7 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
       <div class="meta"><span class="venue">2026</span><span class="note">June</span></div>
       <div>
         <p class="title">ERA:AI Fellowship, Cambridge</p>
-        <p class="blurb"><span class="scale">30 of 6,000+ applicants.</span></p>
+        <p class="blurb"><span class="scale">30 of 6,000+<small>applicants selected</small></span></p>
       </div>
     </article>
 
@@ -270,15 +288,15 @@ footer .stamp{font-family:var(--mono);font-size:.72rem;margin-top:.9rem}
       <div class="meta"><span class="venue">2026</span><span class="note">May</span></div>
       <div>
         <p class="title">Oral presentation, ICML 2026</p>
-        <p class="blurb"><span class="scale">168 orals from 24,371 submissions.</span></p>
+        <p class="blurb"><span class="scale">168 of 24,371<small>submissions selected for oral</small></span></p>
       </div>
     </article>
 
     <article class="entry award">
       <div class="meta"><span class="venue">2022</span><span class="note">August</span></div>
       <div>
-        <p class="title">Rank 10, Iranian National University Entrance Exam</p>
-        <p class="blurb"><span class="scale">Of more than 150,000 participants.</span></p>
+        <p class="title">Iranian National University Entrance Exam</p>
+        <p class="blurb"><span class="scale">Rank 10 of 150,000+<small>national participants</small></span></p>
       </div>
     </article>
   </section>
