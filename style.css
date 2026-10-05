@@ -21,7 +21,7 @@
 
   --measure:50rem;
   --photo:232px;
-  --meta-col:8rem;
+  --meta-col:9.5rem;
   --gutter:2.5rem;
   /* used by the reading page */
   --rail:232px;
@@ -108,21 +108,21 @@ h2::after{
 }
 
 .row{display:grid;grid-template-columns:var(--meta-col) 1fr;gap:1.5rem}
-.when,.venue{font-family:var(--mono);font-size:.9rem;color:var(--muted);padding-top:.2rem;font-variant-numeric:tabular-nums}
+.when,.venue{font-family:var(--mono);font-size:1rem;color:var(--muted);padding-top:.2rem;font-variant-numeric:tabular-nums}
 
 /* ---------- publications ---------- */
 .pub,.job{padding:1rem 1rem;margin:0 -1rem;border-radius:3px;transition:background .18s ease}
 .pub:hover,.job:hover{background:rgba(47,79,66,.045)}
 .pub + .pub{margin-top:.75rem}
 
-.venue{display:flex;flex-direction:column;align-items:flex-start;gap:.4rem;color:var(--ink);font-weight:500;font-size:1.02rem;letter-spacing:-.01em}
+.venue{display:flex;flex-direction:column;align-items:flex-start;gap:.4rem;color:var(--ink);font-weight:500;font-size:1.15rem;letter-spacing:-.01em}
 .oral{
   display:inline-flex;align-items:center;gap:.25rem;margin-top:.15rem;
-  font-family:var(--body);font-size:.74rem;font-weight:600;letter-spacing:.01em;
+  font-family:var(--body);font-size:.86rem;font-weight:600;letter-spacing:.01em;
   color:var(--ink);background:var(--gold);
   border-radius:2px;padding:.12rem .5rem .12rem .42rem;
 }
-.rarity{font-size:.72rem;color:var(--muted);font-weight:400}
+.rarity{font-size:.84rem;color:var(--muted);font-weight:400}
 
 .title{font-size:1.16rem;font-weight:600;line-height:1.32;letter-spacing:-.008em}
 .title a{color:var(--ink);border-bottom-color:transparent}
@@ -144,7 +144,7 @@ h2::after{
   display:grid;grid-template-columns:var(--meta-col) 1fr auto;gap:1.5rem;align-items:baseline;
   padding:.85rem 0;border-bottom:1px solid var(--rule);
 }
-.ledger .what{font-size:1.12rem;font-weight:500;line-height:1.4}
+.ledger .what{font-size:1.22rem;font-weight:500;line-height:1.4}
 .ledger .figure{
   text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;
   font-size:1.05rem;font-weight:500;color:var(--accent);white-space:nowrap;letter-spacing:-.02em;
