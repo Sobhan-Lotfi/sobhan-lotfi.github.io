@@ -1,40 +1,43 @@
 /* Sobhan Lotfi: personal academic page
-   Tokens: ink on white, one ink-blue accent, serif for reading, sans for meta.
-   The one decorative device: a measuring-ruler line beside each section title. */
+   Ink on white, one ink-blue accent, a warm gold reserved for orals.
+   Recurring device: measurement ticks (around the portrait, beside section titles). */
 
 :root {
   --paper: #ffffff;
+  --panel: #f4f6f9;
   --ink: #18202e;
   --ink-soft: #3a4352;
   --muted: #687284;
   --rule: #e3e6eb;
-  --tick: #c9ced6;
+  --tick: #b9c0cb;
   --accent: #1f4fa8;
-  --accent-wash: #eef3fc;
+  --accent-wash: #eaf0fb;
+  --oral: #a8650f;
+  --oral-ink: #ffffff;
 
   --serif: "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-
-  --measure: 44rem;
-  --meta-col: 7.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --paper: #12161d;
+    --panel: #181d26;
     --ink: #e7eaf0;
     --ink-soft: #c5cbd6;
     --muted: #97a1b0;
     --rule: #262d38;
-    --tick: #39424f;
+    --tick: #4a5463;
     --accent: #8fb2f2;
     --accent-wash: #1b2537;
+    --oral: #e2b04e;
+    --oral-ink: #1a1408;
   }
 }
 
 * { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
@@ -49,104 +52,160 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 p { margin: 0; }
 
-.wrap {
-  max-width: var(--measure);
+/* ---------- Page layout: profile column + reading column ---------- */
+
+.page {
+  max-width: 68rem;
   margin: 0 auto;
-  padding: 4.5rem 1.5rem 3rem;
+  padding: 4rem 2rem 3rem;
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: 4.5rem;
 }
 
-/* ---------- Masthead ---------- */
+.profile {
+  position: sticky;
+  top: 3rem;
+  align-self: start;
+}
 
-.masthead {
-  display: grid;
-  grid-template-columns: 7rem 1fr;
-  gap: 1.75rem;
-  align-items: center;
+.content { max-width: 41rem; }
+
+/* ---------- Portrait with a measuring dial ---------- */
+
+.portrait {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
 }
 
 .portrait img {
-  display: block;
-  width: 7rem;
-  height: 7rem;
+  position: absolute;
+  inset: 0.9rem;
+  width: calc(100% - 1.8rem);
+  height: calc(100% - 1.8rem);
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px var(--rule), 0 0 0 5px var(--paper), 0 0 0 6px var(--rule);
+  box-shadow: 0 0 0 1px var(--rule);
 }
 
+/* fine ticks all round */
+.portrait::before,
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: transform 1.2s cubic-bezier(.2, .7, .2, 1);
+}
+.portrait::before {
+  background: repeating-conic-gradient(var(--tick) 0deg 0.8deg, transparent 0.8deg 6deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+}
+/* four longer accent marks, like a dial */
+.portrait::after {
+  background: repeating-conic-gradient(from -1deg, var(--accent) 0deg 2deg, transparent 2deg 90deg);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
+}
+.portrait:hover::before { transform: rotate(24deg); }
+.portrait:hover::after { transform: rotate(-24deg); }
+@media (prefers-reduced-motion: reduce) {
+  .portrait::before, .portrait::after { transition: none; }
+}
+
+/* ---------- Profile text ---------- */
+
 h1 {
-  margin: 0;
-  font-family: var(--serif);
+  margin: 1.4rem 0 0;
   font-weight: 400;
-  font-size: 2.75rem;
-  line-height: 1.05;
+  font-size: 2.2rem;
+  line-height: 1.1;
   letter-spacing: -0.015em;
 }
 
-.say {
-  margin-top: 0.35rem;
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  color: var(--muted);
-  letter-spacing: 0.01em;
-}
-
-.fields {
-  margin-top: 0.75rem;
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-
 .affil {
-  margin-top: 0.15rem;
+  margin-top: 0.5rem;
   font-family: var(--sans);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
   color: var(--muted);
+}
+
+.chips {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chips li {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.12rem 0.6rem;
 }
 
 .contact {
   list-style: none;
   padding: 0;
-  margin: 0.7rem 0 0;
+  margin: 1.3rem 0 0;
+  display: grid;
+  gap: 0.45rem;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+}
+.contact a { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--ink-soft); }
+.contact a:hover { color: var(--accent); text-decoration: none; }
+.contact svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Reading column ---------- */
+
+.jump {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem 1.1rem;
+  gap: 0.3rem 1.3rem;
   font-family: var(--sans);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
 }
+.jump a { color: var(--muted); }
+.jump a:hover { color: var(--accent); }
 
-/* ---------- Intro ---------- */
+.bio { margin-top: 2rem; }
+.bio p { font-size: 1.12rem; line-height: 1.65; }
+.seeking { margin-top: 1rem; font-size: 1.12rem; color: var(--ink-soft); }
 
-.bio { margin-top: 2.75rem; }
-.bio p { font-size: 1.1rem; line-height: 1.65; color: var(--ink); }
-
-.seeking {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: var(--ink-soft);
-}
-
-/* ---------- Sections ---------- */
-
-section { margin-top: 3.75rem; }
+section { margin-top: 3.5rem; scroll-margin-top: 2rem; }
 
 h2 {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin: 0 0 1.5rem;
-  font-family: var(--serif);
+  margin: 0 0 1.4rem;
   font-style: italic;
   font-weight: 400;
   font-size: 1.35rem;
-  color: var(--ink);
 }
-
-/* the ruler: a hairline with small ticks, a nod to measurement */
 h2::after {
   content: "";
   flex: 1;
@@ -156,42 +215,51 @@ h2::after {
     repeating-linear-gradient(to right, var(--tick) 0 1px, transparent 1px 12px) left bottom / 100% 5px no-repeat;
 }
 
-/* shared two-column row: meta on the left, content on the right */
-.row {
-  display: grid;
-  grid-template-columns: var(--meta-col) 1fr;
-  gap: 1.25rem;
-}
-
-.when, .venue {
+.when {
   font-family: var(--sans);
   font-size: 0.8rem;
   color: var(--muted);
-  padding-top: 0.2rem;
   font-variant-numeric: tabular-nums;
+  padding-top: 0.2rem;
+  white-space: nowrap;
 }
 
-/* ---------- Publications: the roomiest section ---------- */
+/* ---------- News ---------- */
 
-.pub + .pub { margin-top: 2rem; }
+.news { list-style: none; margin: 0; padding: 0; }
+.news li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem;
+  padding: 0.35rem 0;
+}
+.news .what { font-size: 1rem; line-height: 1.5; }
 
-.venue { display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+/* ---------- Publications ---------- */
 
-.tag {
+.pub + .pub { margin-top: 2.1rem; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.45rem; }
+.badge {
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--accent);
-  background: var(--accent-wash);
-  border-radius: 999px;
-  padding: 0.05rem 0.55rem;
+  line-height: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.badge.oral {
+  color: var(--oral-ink);
+  background: var(--oral);
+  border-color: var(--oral);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-.pub .title {
-  font-size: 1.12rem;
-  font-weight: 500;
-  line-height: 1.35;
-}
+.pub .title { font-size: 1.14rem; font-weight: 500; line-height: 1.35; }
 .pub .title a { color: var(--ink); }
 .pub .title a:hover { color: var(--accent); }
 
@@ -204,90 +272,68 @@ h2::after {
 }
 .me { color: var(--ink); font-weight: 500; }
 
-.blurb {
-  margin-top: 0.5rem;
-  font-size: 0.98rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
+.blurb { margin-top: 0.5rem; font-size: 0.98rem; line-height: 1.55; color: var(--ink-soft); }
 
-.links {
-  margin-top: 0.45rem;
-  display: flex;
-  gap: 0.9rem;
-  font-family: var(--sans);
-  font-size: 0.8rem;
-}
+.links { margin-top: 0.45rem; display: flex; gap: 0.9rem; font-family: var(--sans); font-size: 0.8rem; }
 
-/* ---------- Experience: a compact timeline ---------- */
+/* ---------- Experience ---------- */
 
-.job + .job { margin-top: 1.25rem; }
-
+.job { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; }
+.job + .job { margin-top: 1.3rem; }
 .job .role { font-size: 1.02rem; font-weight: 500; line-height: 1.4; }
 .job .org { font-family: var(--sans); font-size: 0.85rem; color: var(--muted); margin-top: 0.1rem; }
 .job .detail { margin-top: 0.3rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink-soft); }
 
-/* ---------- Awards: a ledger with right-aligned figures ---------- */
+/* ---------- Awards ---------- */
 
 .ledger { list-style: none; margin: 0; padding: 0; }
-
 .ledger li {
   display: grid;
-  grid-template-columns: var(--meta-col) 1fr auto;
-  gap: 1.25rem;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: 1rem;
   align-items: baseline;
   padding: 0.7rem 0;
   border-bottom: 1px solid var(--rule);
 }
 .ledger li:first-child { border-top: 1px solid var(--rule); }
-
 .ledger .what { font-size: 1rem; line-height: 1.4; }
-
 .ledger .figure {
   text-align: right;
   font-family: var(--sans);
   font-variant-numeric: tabular-nums;
   font-size: 0.9rem;
-  color: var(--ink);
   white-space: nowrap;
 }
-.ledger .figure small {
-  display: block;
-  font-size: 0.72rem;
-  color: var(--muted);
-}
+.ledger .figure small { display: block; font-size: 0.72rem; color: var(--muted); }
 
-/* ---------- Service: the lightest section ---------- */
+/* ---------- Service ---------- */
 
 .plain { list-style: none; margin: 0; padding: 0; }
-.plain li { padding: 0.25rem 0; }
+.plain li { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding: 0.25rem 0; }
 .plain .what { font-size: 0.98rem; color: var(--ink-soft); }
 
 /* ---------- Footer ---------- */
 
 footer {
-  margin-top: 4.5rem;
-  padding-top: 1.25rem;
+  margin-top: 4rem;
+  padding-top: 1.2rem;
   border-top: 1px solid var(--rule);
   font-size: 0.95rem;
   color: var(--muted);
 }
-footer .stamp {
-  margin-top: 0.5rem;
-  font-family: var(--sans);
-  font-size: 0.75rem;
+footer .stamp { margin-top: 0.5rem; font-family: var(--sans); font-size: 0.75rem; }
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 880px) {
+  .page { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2.5rem; }
+  .profile { position: static; }
+  .portrait { width: 8rem; height: 8rem; }
 }
-
-/* ---------- Small screens ---------- */
-
-@media (max-width: 600px) {
+@media (max-width: 560px) {
   body { font-size: 17px; }
-  .wrap { padding-top: 2.75rem; }
-  .masthead { grid-template-columns: 1fr; gap: 1.1rem; }
-  .portrait img { width: 5.5rem; height: 5.5rem; }
-  h1 { font-size: 2.25rem; }
-  .row { grid-template-columns: 1fr; gap: 0.35rem; }
-  .venue { flex-direction: row; align-items: center; }
+  .page { padding: 2rem 1.25rem 2.5rem; }
+  .news li, .job, .plain li { grid-template-columns: 1fr; gap: 0.15rem; }
   .ledger li { grid-template-columns: 1fr auto; }
   .ledger .when { grid-column: 1 / -1; padding-top: 0; }
 }
