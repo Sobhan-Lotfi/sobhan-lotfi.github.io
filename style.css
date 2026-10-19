@@ -360,7 +360,7 @@ section[id],article.book[id]{scroll-margin-top:5.5rem}
    the original 50rem content measure is unchanged. */
 .section-index{
   position:fixed;z-index:8;top:32vh;
-  left:max(1rem,calc(50% - 40rem));
+  left:max(1rem,calc(50% - 45rem));
   display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;
   width:11rem;font-family:var(--mono);font-size:.67rem;line-height:1.5;
 }
