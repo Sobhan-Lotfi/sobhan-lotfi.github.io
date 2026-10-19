@@ -3,11 +3,11 @@
   'use strict';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduceMotion.matches) return; // Static, fully readable site.
+  const motionEnabled = !reduceMotion.matches;
 
   // 1. Type the name without changing the h1's intrinsic dimensions.
   const heading = document.querySelector('.masthead .id h1');
-  if (heading) {
+  if (heading && motionEnabled) {
     const fullName = heading.textContent.trim();
     const original = document.createElement('span');
     original.className = 'typing-source';
@@ -38,18 +38,18 @@
       index += 1;
       letters.textContent = characters.slice(0, index).join('');
       if (index < characters.length) {
-        timer = window.setTimeout(typeNext, characters[index - 1] === ' ' ? 105 : 77);
+        timer = window.setTimeout(typeNext, characters[index - 1] === ' ' ? 240 : (index === 1 ? 140 : 130));
       } else {
         endTimer = window.setTimeout(finish, 650);
       }
     };
-    timer = window.setTimeout(typeNext, 320);
+    timer = window.setTimeout(typeNext, 330);
     reduceMotion.addEventListener('change', (e) => { if (e.matches) finish(); }, {once:true});
   }
 
   // 2. Pointer-sensitive portrait tilt (mouse/trackpad only).
   const portrait = document.querySelector('.portrait');
-  if (portrait && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  if (portrait && motionEnabled && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
     portrait.addEventListener('pointermove', (event) => {
       const r = portrait.getBoundingClientRect();
       const x = ((event.clientX - r.left) / r.width - .5) * 2;
@@ -63,8 +63,54 @@
     });
   }
 
+
+  // Editorial navigation: active links update while scrolling.
+  const indexNav = document.querySelector('.section-index');
+  if (indexNav) {
+    const targets = [...indexNav.querySelectorAll('a[data-section]')];
+    const linkedSections = targets.map(a => document.getElementById(a.dataset.section));
+    let ticking = false;
+    const setActive = () => {
+      const threshold = Math.min(window.innerHeight * .36, 270);
+      let current = -1;
+      linkedSections.forEach((section,i) => {
+        if (section && section.getBoundingClientRect().top <= threshold) current = i;
+      });
+      targets.forEach((a,i) => {
+        const active = i === current;
+        a.classList.toggle('is-active',active);
+        if (active) a.setAttribute('aria-current','location');
+        else a.removeAttribute('aria-current');
+      });
+      indexNav.style.setProperty('--index-progress', `${Math.max(0,(current+1)/targets.length)*100}%`);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(setActive); }
+    }, {passive:true});
+    window.addEventListener('resize',setActive,{passive:true});
+    setActive();
+  }
+
+  // A subtle active-state marker for the reading gallery.
+  const shelfLinks = [...document.querySelectorAll('.shelf-book')];
+  if (shelfLinks.length && 'IntersectionObserver' in window) {
+    const shelfObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        shelfLinks.forEach(link => {
+          const on = link.hash === `#${entry.target.id}`;
+          link.classList.toggle('is-current',on);
+          if (on) link.setAttribute('aria-current','location');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    },{rootMargin:'-15% 0px -55% 0px',threshold:0});
+    document.querySelectorAll('article.book[id]').forEach(book=>shelfObserver.observe(book));
+  }
+
   // 3, 6, 9. Reveal what is in view, once; preserve source ordering.
-  if (!('IntersectionObserver' in window)) return;
+  if (!motionEnabled || !('IntersectionObserver' in window)) return;
   const sections = [...document.querySelectorAll('main section')];
   const revealItems = [...document.querySelectorAll('.pub, .job, .ledger li, .plain li, .book')];
   revealItems.forEach((item) => {
