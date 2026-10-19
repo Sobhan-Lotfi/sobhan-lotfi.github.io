@@ -352,37 +352,6 @@ footer .stamp{font-family:var(--mono);font-size:.78rem;margin-top:1rem}
 }
 
 
-/* =================== Editorial edition / 2026 =================== */
-html{scroll-behavior:smooth}
-section[id],article.book[id]{scroll-margin-top:5.5rem}
-
-/* On wide screens the index occupies the existing outside margin;
-   the original 50rem content measure is unchanged. */
-.section-index{
-  position:fixed;z-index:8;top:32vh;
-  left:max(1rem,calc(50% - 45rem));
-  display:flex;flex-direction:column;align-items:flex-start;gap:.55rem;
-  width:11rem;font-family:var(--mono);font-size:.67rem;line-height:1.5;
-}
-.index-caption{font-size:.6rem;letter-spacing:.09em;color:var(--muted);margin-bottom:.9rem}
-.index-caption span{color:var(--rule)}
-.section-index a{display:flex;gap:.8rem;align-items:baseline;color:var(--muted);border:0;padding:.25rem .35rem .25rem 0;transition:transform .24s ease,color .24s ease}
-.section-index a:hover,.section-index a.is-active{color:var(--accent);transform:translateX(3px)}
-.section-index a.is-active{font-weight:500}
-.index-number{color:#9C9F95;font-size:.62rem;font-variant-numeric:tabular-nums}
-.section-index a.is-active .index-number{color:var(--accent)}
-.index-track{display:block;width:1px;height:65px;margin:.8rem 0 0 .4rem;background:var(--rule)}
-.index-progress{display:block;width:1px;height:var(--index-progress,0%);background:var(--accent);transition:height .24s ease}
-@media(max-width:1150px){
- .section-index{position:sticky;top:0;left:auto;width:auto;display:flex;flex-direction:row;gap:clamp(.5rem,3vw,1.8rem);align-items:center;overflow-x:auto;white-space:nowrap;scrollbar-width:none;margin:2rem 0 0;padding:.8rem .4rem;background:rgba(242,242,239,.97);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);backdrop-filter:blur(10px)}
- .section-index::-webkit-scrollbar{display:none}
- .section-index .index-caption,.section-index .index-track{display:none}
- .section-index a{flex-shrink:0;font-size:.69rem;padding:.2rem 0}
-}
-@media(min-width:1151px) and (max-width:1300px){
-  .section-index{left:.75rem;width:10rem}
-}
-@media(max-width:540px){.section-index{gap:1rem;margin-top:1.4rem}.section-index a{font-size:.65rem;gap:.3rem}.index-number{font-size:.55rem}}
 
 
 /* The bookshelf is a visual index, not a replacement for any essay. */
