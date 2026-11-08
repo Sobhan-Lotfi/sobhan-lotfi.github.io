@@ -174,9 +174,9 @@ h2::after{
     rgba(242,242,239,.985) 0%,
     rgba(242,242,239,.95) 30%,
     rgba(242,242,239,.90) 48%,
-    rgba(242,242,239,.78) 63%,
-    rgba(242,242,239,.48) 80%,
-    rgba(242,242,239,.06) 100%);
+    rgba(242,242,239,.75) 63%,
+    rgba(242,242,239,.40) 80%,
+    rgba(242,242,239,.04) 100%);
   pointer-events:none;
 }
 .photo-job > div{position:relative;z-index:1}
@@ -461,7 +461,7 @@ footer .stamp{font-family:var(--mono);font-size:.78rem;margin-top:1rem}
     background:linear-gradient(90deg,
       rgba(242,242,239,.97) 0%,
       rgba(242,242,239,.93) 60%,
-      rgba(242,242,239,.70) 100%);
+      rgba(242,242,239,.66) 100%);
   }
   .photo-job > div:last-child{max-width:none}
 }
