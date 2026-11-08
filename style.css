@@ -146,26 +146,24 @@ h2::after{
   padding:.9rem .95rem;
   border:1px solid var(--rule);
   border-radius:3px;
-  background-color:var(--paper);
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  background:var(--paper);
+  transition:border-color .22s ease;
 }
 
-/* Keep the original image crop and size on the right. A very faint
-   full-card copy prevents a visible starting edge on the left. */
+/* Exactly one photo layer per card, fading naturally into the paper. */
 .photo-job::before{
   content:"";
   position:absolute;
   inset:0 0 0 auto;
-  width:62%;
+  width:74%;
   z-index:-2;
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  opacity:1;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.15) 18%,rgba(0,0,0,.8) 65%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.15) 18%,rgba(0,0,0,.8) 65%,#000 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 20%,rgba(0,0,0,.77) 65%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 20%,rgba(0,0,0,.77) 65%,#000 100%);
+  filter:none;
+  transition:filter .25s ease;
 }
 .photo-job::after{
   content:"";
@@ -184,12 +182,14 @@ h2::after{
 .photo-job > div{position:relative;z-index:1}
 .photo-job > div:last-child{max-width:25rem}
 
-.uk-job{background-image:url("UK.jpg")}
+/* Hover changes color slightly, never image size, position, or fade. */
+.photo-job:hover{border-color:rgba(47,79,66,.38)}
+.photo-job:hover::before{filter:saturate(1.07) brightness(1.035)}
+
 .uk-job::before{
   background-image:url("UK.jpg");
   background-position:60% center;
 }
-.hk-job{background-image:url("HK.jpg")}
 .hk-job::before{
   background-image:url("HK.jpg");
   background-position:57% center;
