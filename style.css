@@ -137,50 +137,87 @@ h2::after{
 .job .org{font-size:.95rem;color:var(--muted);margin-top:.1rem}
 .job .detail{margin-top:.3rem;font-size:.97rem;line-height:1.55;color:var(--muted)}
 
-/* Internship photos: a paper fade preserves legibility and the editorial palette. */
+/* ---------- internship photo cards ---------- */
 .photo-job{
-  position:relative;isolation:isolate;overflow:hidden;
-  min-height:205px;padding:1rem 1.1rem;
-  border:1px solid var(--rule);border-radius:3px;
-  background:var(--paper);
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:.9rem .95rem;
+  min-height:170px;
+  background-color:var(--paper);
+
+  /* per-card controls */
+  --photo-position:right center;
+  --photo-scale:1.02;
+  --photo-hover-scale:1.05;
 }
+
+.photo-job > *{
+  position:relative;
+  z-index:1;
+}
+
 .photo-job::before{
-  content:"";position:absolute;inset:0 0 0 auto;width:62%;z-index:-2;
-  background-size:cover;background-position:center;
-  opacity:.92;transform:scale(1);transform-origin:right center;
-  transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .35s ease;
+  content:"";
+  position:absolute;
+  inset:0;
+  background-position:var(--photo-position);
+  background-size:cover;
+  background-repeat:no-repeat;
+  opacity:1;
+  z-index:0;
+  transform:scale(var(--photo-scale));
+  transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .3s ease;
 }
+
 .photo-job::after{
-  content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(90deg,
-    var(--paper) 0%,
-    rgba(242,242,239,.99) 40%,
-    rgba(242,242,239,.96) 63%,
-    rgba(242,242,239,.78) 80%,
-    rgba(242,242,239,.18) 100%);
-  pointer-events:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(90deg,
+      rgba(242,242,239,.90) 0%,
+      rgba(242,242,239,.82) 24%,
+      rgba(242,242,239,.66) 44%,
+      rgba(242,242,239,.34) 68%,
+      rgba(242,242,239,.08) 100%);
 }
-.photo-job > div{position:relative;z-index:1}
-.photo-job > div:last-child{max-width:23rem}
-.uk-job::before{background-image:url("UK.jpg");background-position:48% center}
-.hk-job::before{background-image:url("HK.jpg");background-position:57% center}
-@media (hover:hover){
-  .photo-job:hover::before{transform:scale(1.035);opacity:1}
+
+.photo-job:hover::before{
+  transform:scale(var(--photo-hover-scale));
 }
-@media (max-width:820px){
-  .job.photo-job{margin:0;padding:.95rem;min-height:0}
-  .photo-job::before{width:100%}
-  .photo-job::after{
-    background:linear-gradient(90deg,
-      rgba(242,242,239,.97) 0%,
-      rgba(242,242,239,.94) 60%,
-      rgba(242,242,239,.83) 100%);
-  }
-  .photo-job > div:last-child{max-width:none}
+
+/* Cambridge / UK */
+.uk-job{
+  --photo-position:72% center;
+  --photo-scale:1.10;
+  --photo-hover-scale:1.13;
 }
-@media (prefers-reduced-motion:reduce){
-  .photo-job::before{transition:none}
-  .photo-job:hover::before{transform:none}
+
+.uk-job::before{
+  background-image:url("UK.jpg");
+  transform-origin:30% center;
+}
+
+/* HKUST / HK */
+.hk-job{
+  --photo-position:center center;
+  --photo-scale:1.03;
+  --photo-hover-scale:1.06;
+}
+
+.hk-job::before{
+  background-image:url("HK.jpg");
+}
+
+.photo-job .role,
+.photo-job .org,
+.photo-job .detail,
+.photo-job .links{
+  max-width:34rem;
 }
 
 /* ---------- awards: a ledger ---------- */
@@ -440,4 +477,25 @@ footer .stamp{font-family:var(--mono);font-size:.78rem;margin-top:1rem}
 @media (max-width:820px){
   .news{margin-top:1.4rem}
   .news .news-box{max-height:14rem;padding:1rem;box-shadow:4px 4px 0 rgba(47,79,66,.10)}
+}
+
+@media (max-width:820px){
+  .photo-job{
+    min-height:auto;
+    padding:.8rem .9rem;
+  }
+
+  .photo-job::after{
+    background:
+      linear-gradient(180deg,
+        rgba(242,242,239,.82) 0%,
+        rgba(242,242,239,.88) 100%);
+  }
+
+  .photo-job .role,
+  .photo-job .org,
+  .photo-job .detail,
+  .photo-job .links{
+    max-width:none;
+  }
 }
